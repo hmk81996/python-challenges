@@ -14,97 +14,106 @@ total_months = 0
 total_net = 0
 
 # Add more variables to track other necessary financial data
+
+#variables to track net change
 initial_value = None
 final_value = None
-previous_profit = None
-greatest_increase = 0
-greatest_increase_month = ""
-greatest_decrease = 0
-greatest_decrease_month = ""
+# previous_profit = 
+
+#variables used to track greatest increase and decrease
+# greatest_increase = 0
+# greatest_increase_month = ""
+# greatest_decrease = 0
+# greatest_decrease_month = ""
 
 
 # Open and read the csv
 with open(file_to_load) as financial_data:
     reader = csv.reader(financial_data)
 
-    # Skip the header row
+    # Skip the header row (what's the difference from extracting first row?)
     header = next(reader)
 
-    # Extract first row to avoid appending to net_change_list
-    first_row = next(reader)
+    # QUESTION Extract first row to avoid appending to net_change_list (but then my total is off)
+    # first_row = next(reader)
 
-    # Track the total and net change (make a list?)
-    #total_net
-
+    # QUESTION Track the total and net change
+        
     # Process each row of data
     for row in reader:
 
         # Track the total
-        month = row["Date"]
-        total_months[int(month)] += 1
+        transaction = int(row[1])
+        total_net += transaction
+
+        #calculate total months
+        if row[0]:  
+            total_months += 1
 
         # Track the net change
-        profit_loss = row["Profit/Losses"]
-        total_net += float(profit_loss)
+        #get profit/loss value
+        value = int(row[1])
 
-        net_change =  float(row["Profits/Losses"])
-
+        #set initial value      
         if initial_value is None:
             initial_value = value
-        
+
+        #update the final value with current value
         final_value = value
 
+        #caluculate net change
+        # if initial_value is not None and final_value is not None:
         net_change = final_value - initial_value
 
-        # Calculate the greatest increase in profits (month and amount)
-        month = row[0]
-        profit = int(row[1])
+        # # Calculate the greatest increase in profits (month and amount)
+        # month = row[0]
+        # profit = int(row[1])
 
-        if previous_profit is not None:
-            change = profit - previous_profit
+        # if previous_profit is not None:
+        #     change = profit - previous_profit
 
-            #check for greatest increase
-            if change > greatest_increase:
-                greatest_increase = change
-                greatest_increase_month = month
+        #     #check for greatest increase
+        #     if change > greatest_increase:
+        #         greatest_increase = change
+        #         greatest_increase_month = month
             
-            previous_profit = profit
+        #     previous_profit = profit
 
-        # Calculate the greatest decrease in losses (month and amount)
-        if previous_profit is not None:
-            change = profit - previous_profit
+        # # Calculate the greatest decrease in losses (month and amount)
+        # if previous_profit is not None:
+        #     change = profit - previous_profit
 
-            #check for greatest decrease
-            if change > greatest_decrease:
-                greatest_decrease = change
-                greatest_decrease_month = month
+        #     #check for greatest decrease
+        #     if change > greatest_decrease:
+        #         greatest_decrease = change
+        #         greatest_decrease_month = month
 
 
 
 
 # Calculate the average net change across the months
-def avg(net_change):
-    return net_change / total_months
+# print(f"$" + str(net_change))
 
-avg(net_change)
+avg_net_change = float(net_change/total_months)
+
 
 # Generate the output summary
-# total_months = 
-# total_net = 
-# changes = 
+total_months
+total_net
+avg_net_change
 # greatest_increase = 
 # greatest_decrease = 
 
-# Print the output (Do I need an outpout variable?)
-#output = 
+# Print the output 
+
 print("Financial Analysis")
 print("-------------------------------")
-print(f"Total Months: + {total_months}")
-print(f"Total: + $ + (total_net)")
-print(f"Average Change: + int(avg(net_change))")
-print(f"Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})")
-print(f"Greatest Decrease in Profits:")
+print(f"Total Months: {total_months}")
+print(f"Total:"+ "$" + str(total_net) )
+print(f"Average Change:" + "$" + str(avg_net_change))
+# print(f"Greatest Increase in Profits: {greatest_increase_month} (${greatest_increase})")
+# print(f"Greatest Decrease in Profits:")
 
 # Write the results to a text file
-with open(file_to_output, "w") as txt_file:
-    txt_file.write(output)
+# with open(file_to_output, "w") as txt_file:
+#     txt_file.write(output)
