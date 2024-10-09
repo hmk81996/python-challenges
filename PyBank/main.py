@@ -77,8 +77,8 @@ avg_net_change = (sum(net_change_list))/(len(net_change_list))
 # Generate the output summary
 
 output = (
-    f"Financial Analysis"
-    f"----------------------------"
+    f"Financial Analysis\n"
+    f"----------------------------\n"
     f"Total Months: {total_months}\n"
     f"Total: ${total_net}\n"
     f"Average Change: ${avg_net_change:.2f}\n"
