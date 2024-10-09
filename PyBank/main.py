@@ -5,7 +5,7 @@
 import csv
 import os
 
-# Files to load and output (update with correct file paths)
+# Files to load and output
 file_to_load = os.path.join("PyBank", "Resources", "budget_data.csv")  # Input file path
 file_to_output = os.path.join("PyBank", "analysis", "analysis_output.txt")  # Output file path
 
@@ -14,8 +14,6 @@ total_months = 0
 total_net = 0
 
 # Add more variables to track other necessary financial data
-
-#variables used to track greatest increase and decrease
 month_to_month = []
 net_change_list = []
 greatest_increase = ["", 0]
@@ -25,10 +23,10 @@ greatest_decrease = ["", 999999999999]
 with open(file_to_load) as financial_data:
     reader = csv.reader(financial_data)
 
-    # Skip the header row (what's the difference from extracting first row?)
+    # Skip the header row
     header = next(reader)
 
-    # Extract first row to avoid appending to net_change_list (but then my total is off)
+    # Extract first row to avoid appending to net_change_list
     first_row = next(reader)
         
     # Track the total and net change
@@ -64,18 +62,14 @@ with open(file_to_load) as financial_data:
             greatest_increase[1] = net_change
             
         # # Calculate the greatest decrease in losses (month and amount)
-        #check for greatest decrease
         if net_change < greatest_decrease[1]:
             greatest_decrease[0] = row[0]
             greatest_decrease[1] = net_change
 
 # Calculate the average net change across the months
-# print(f"$" + str(net_change))
-
 avg_net_change = (sum(net_change_list))/(len(net_change_list))
 
 # Generate the output summary
-
 output = (
     f"Financial Analysis\n"
     f"----------------------------\n"
