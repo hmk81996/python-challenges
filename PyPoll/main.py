@@ -12,8 +12,7 @@ file_to_output = os.path.join("Analysis", "analysis_output.txt")  # Output file 
 # Initialize variables to track the election data
 total_votes = 0  # Track the total number of votes cast
 
-# QUESTION Define lists and dictionaries to track candidate names and vote counts
-# How do I make sure I'm adding to the dictionary?
+#Define lists and dictionaries to track candidate names and vote counts
 candidate_dict = {}
 vote_percentages = {}
 
