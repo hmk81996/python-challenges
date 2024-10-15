@@ -7,7 +7,7 @@ import os
 
 # Files to load and output
 file_to_load = os.path.join("Resources", "budget_data.csv")  # Input file path
-file_to_output = os.path.join("analysis", "analysis_output.txt")  # Output file path
+file_to_output = os.path.join("Analysis", "analysis_output.txt")  # Output file path
 
 # Define variables to track the financial data
 total_months = 0
